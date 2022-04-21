@@ -15,9 +15,22 @@
             die();
         }
     }
-    function selectRecettes(){
-        $conn = connexionPDO();
-        return $conn->query("SELECT id, nom, description FROM recette");
+    function selectRecettes() {
+        $resultat = array();
+        try {
+            $cnx = connexionPDO();
+            $req = $cnx->prepare("select * from recettes ");
+            $req->execute();
+            $ligne = $req->fetch(PDO::FETCH_ASSOC);
+            while ($ligne) {
+                $resultat[] = $ligne;
+                $ligne = $req->fetch(PDO::FETCH_ASSOC);
+            }
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage();
+            die();
+        }
+        return $resultat;
     }
 
     ini_set('soap.wsdl_cache_enabled', 0);
@@ -25,6 +38,7 @@
     $serversoap=new SoapServer("http://localhost/php_tp_soap/Soap_API_cuisine/soap.wsdl");
 
     $serversoap->addFunction("selectRecettes");
+
     $serversoap->handle();
 
 ?>

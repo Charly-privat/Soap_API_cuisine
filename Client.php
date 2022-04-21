@@ -4,10 +4,7 @@
     $service=new SoapClient("http://localhost/php_tp_soap/Soap_API_cuisine/soap.wsdl");
 
     $result=$service->selectRecettes();
-    echo $result;
 
-    foreach ($result as $row) {
-        echo $row['id']." ".$row['nom']." ".$row['description']."<br />\n";
-    }
+    print_r($result);
 
 ?>

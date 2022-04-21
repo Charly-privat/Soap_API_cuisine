@@ -17,7 +17,6 @@
 
     <portType name="essai_instancePortType">
         <operation name="selectRecettes">
-            <input message="typens:selectRecettes"/>
             <output message="typens:selectRecettesResponse"/>
         </operation>
     </portType>
@@ -26,9 +25,6 @@
         <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="selectRecettes">
             <soap:operation soapAction="urn:essai_instanceAction"/>
-            <input>
-                <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
             <output>
                 <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
